@@ -29,5 +29,16 @@ def get_list_of_books(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Book).offset(skip).limit(limit).all()
 
 
-def filter_books_by_author_id(db: Session, author_id: int):
-    return db.query(Book).filter(Book.author_id == author_id).all()
+def filter_books_by_author_id(
+    db,
+    author_id: int,
+    skip: int = 0,
+    limit: int = 100,
+):
+    return (
+        db.query(Book)
+        .filter(Book.author_id == author_id)
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )

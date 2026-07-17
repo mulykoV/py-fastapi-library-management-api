@@ -103,6 +103,13 @@ def get_books_endpoint(
 @app.get("/books/author/{author_id}", response_model=list[BookResponse])
 def get_books_by_author_endpoint(
     author_id: int,
+    skip: int = 0,
+    limit: int = 100,
     db: Session = Depends(get_db),
 ):
-    return filter_books_by_author_id(db, author_id)
+    return filter_books_by_author_id(
+        db,
+        author_id,
+        skip,
+        limit,
+    )
